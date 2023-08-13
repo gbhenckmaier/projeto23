@@ -1,55 +1,62 @@
 
-const Engine = Matter.Engine;
-const World = Matter.World;
-const Bodies = Matter.Bodies;
-const Body = Matter.Body;
 
-let engine;
-let world;
-var ball;
-var ground;
-var wedge;
-var angle=60;
-var poly;
-var boxes=[];
+
+//Crie um namespace (espaço de nomes) para Mecanismo
+const Engine=Matter.Engine
+//Crie um namespace (espaço de nomes) para Mundo
+const World=Matter.World
+//Crie um namespace (espaço de nomes) para Corpos
+const Bodies=Matter.Bodies
+//Crie um namespace (espaço de nomes) para Corpo
+const Body=Matter.Body
 
 function setup() {
   createCanvas(400,400);
-
-  engine = Engine.create();
+//crie o mecanismo
+engine = Engine.creat();
+  //Adicione mundo ao mecanismo
   world = engine.world;
-  var option={
-    isStatic:true
-  };
-  ground=Bodies.rectangle(100,300,400,20,option);
-  World.add(world,ground);
-  //box1 = new Box(200,100,50,50);
+
+  
+   var ball_options = {
+    restitution: 0.95,
+    frictionAir:0.01
+  }
+   
+   var ground_options ={
+     isStatic: true
+   };
+  
+  
+//crie o solo
+//adicione ao mundo
+World.add(world,grond);
+
+
+
+  ball = Bodies.circle(100,10,20,ball_options);
+  World.add(world,ball);
+  
+  
   
 
   rectMode(CENTER);
   ellipseMode(RADIUS);
 }
-function mousePressed(){
-  boxes.push(
-    
-    //new Box(50,50,50,50)
-    
-    new Box(mouseX,mouseY,50,50)
 
-    //new Box(50,50,mouseX,mouseY)
-    
-    //new Box(mouseY,mouseX,50,50)  
-    
-    )
-}
 
 function draw() 
 {
   background(51);
-  rect(ground.position.x,ground.position.y,400,10);
   Engine.update(engine);
- for(var i=0;i<boxes.length;i++) {
- boxes[i].show();}
+  
+  
+
+  ellipse(ball.position.x,ball.position.y,20);
+  //escreva uma função de retângulo para exibir o solo.
+ 
+
+
   
   
 }
